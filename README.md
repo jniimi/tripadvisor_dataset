@@ -32,10 +32,25 @@ Our actual dataset is stored in Huggingface Dataset so that you need to install 
 ```bash
 pip install datasets
 ```
-You can load the dataset like,
+You can load the dataset with `datasets`
 ```python
 from datasets import load_dataset
-df = load_dataset("jniimi/tripadvisor")
+df = load_dataset("jniimi/tripadvisor-review-rating")
+```
+or perhaps grabbing the pickle file as:
+```python
+import pandas as pd
+from huggingface_hub import hf_hub_download
+f = hf_hub_download('jniimi/tripadvisor-review-rating', repo_type='dataset', filename='data.pkl')
+df = pd.read_pickle(f)
+```
+
+However, the whole dataset is huge so that you can also use the sampled data with 1000 observations file ([https://huggingface.co/datasets/jniimi/tripadvisor-review-rating/resolve/main/data1000.pkl](https://huggingface.co/datasets/jniimi/tripadvisor-review-rating/resolve/main/data1000.pkl)) as follows (e.g., using google colab):
+```python
+import pandas as pd
+from huggingface_hub import hf_hub_download
+f = hf_hub_download('jniimi/tripadvisor-review-rating', repo_type='dataset', filename='data1000.pkl')
+df = pd.read_pickle(f)
 ```
 
 ## Reference
