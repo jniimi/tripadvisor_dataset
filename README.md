@@ -7,7 +7,7 @@ This repository contains a dataset of hotel reviews and ratings collected from T
 The data was originally distributed by Jiwei Li et al. (2013) and is hosted on his website [http://www.cs.cmu.edu/~jiweil/html/hotel-review.html](http://www.cs.cmu.edu/~jiweil/html/hotel-review.html) at Carnegie Mellon University.
 
 ## Processing
-For details on how we processed the dataset, please refer to the [\`get_data.ipynb\`](https://github.com/jniimi/tripadvisor_dataset/blob/main/get_data.ipynb) file. Essentially, we used machine learning to extract posts where reviews are written in English. Specifically, we adopted \`fastText\`　([https://fasttext.cc](https://fasttext.cc)) by Meta, utilizing the pre-trained model [\`lid.176.bin\`](https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin).
+For details on how we processed the dataset, please refer to the [\`process.ipynb\`](https://github.com/jniimi/tripadvisor_dataset/blob/main/process.ipynb) file. Essentially, we used machine learning to extract posts where reviews are written in English. Specifically, we adopted \`fastText\`　([https://fasttext.cc](https://fasttext.cc)) by Meta, utilizing the pre-trained model [\`lid.176.bin\`](https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin).
 
 ## Dataset Description
 The contents of the two datasets (.csv and .pkl) are same; however, we recommend using pickle file (.pkl) which retains information on pandas variable types and np.nan for missing values, especially datetime. In the original data, the various variables were stored in JSON format, but we have reorganised them so that the reviews and ratings are combined in one line as a pandas data set.
@@ -16,7 +16,8 @@ The dataset includes the following columns in each line:
 - `hotel_id`: Unique identifier for hotels.
 - `user_id`: Unique identifier for users.
 - `title`: Heading of the user review.
-- `review`: Actual text of the review.
+- `text`: Actual text of the review.
+- `review`: reviews combined as follows: `title` \n `text`
 - `overall`: The rating given by the user.
 - `cleanliness`: The rating regarding the cleanliness.
 - `value`: The rating regarding the value.
@@ -27,12 +28,23 @@ The dataset includes the following columns in each line:
 - `date`: The date when the review was posted.
 
 ## Usage
+Our actual dataset is stored in Huggingface Dataset so that you need to install `datasets` package as follows:
+```bash
+pip install datasets
+```
+You can load the dataset like,
+```python
+from datasets import load_dataset
+df = load_dataset("jniimi/tripadvisor")
+```
+
+## Reference
 As indicated earlier, this dataset is a reprocessed distribution of a published dataset by Dr. Li, so please follow their instructions for use.
 
-### Original Dataset
+### 1. Original Dataset
 Do not forget to cite the original Hotel Dataset (Li et al., 2013) [https://nlp.stanford.edu/~bdlijiwei/Code.html](https://nlp.stanford.edu/~bdlijiwei/Code.html)
 
-### Citation for us
+### 2. Citation for us
 Our dataset will soon be citable in academic publications as well.
 ```
 @misc{tripadvisor_dataset,
