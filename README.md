@@ -32,10 +32,11 @@ Our actual dataset is stored in Huggingface Dataset so that you need to install 
 ```bash
 pip install datasets
 ```
-You can load the dataset with `datasets`
+You can load the dataset with `datasets` package and easily convert to `pd.DataFrame` as:
 ```python
 from datasets import load_dataset
 df = load_dataset("jniimi/tripadvisor-review-rating")
+df = df['train'].to_pandas()
 ```
 or perhaps grabbing the pickle file as:
 ```python
@@ -53,15 +54,25 @@ f = hf_hub_download('jniimi/tripadvisor-review-rating', repo_type='dataset', fil
 df = pd.read_pickle(f)
 ```
 
-## Reference
+## Citation
 As indicated earlier, this dataset is a reprocessed distribution of a published dataset by Dr. Li, so please follow their instructions for use.
 
 ### 1. Original Dataset
 Do not forget to cite the original Hotel Dataset (Li et al., 2013) [https://nlp.stanford.edu/~bdlijiwei/Code.html](https://nlp.stanford.edu/~bdlijiwei/Code.html)
+```bibtex
+@inproceedings{li2013identifying,
+  title={Identifying manipulated offerings on review portals},
+  author={Li, Jiwei and Ott, Myle and Cardie, Claire},
+  booktitle={Proceedings of the 2013 conference on empirical methods in natural language processing},
+  pages={1933--1942},
+  year={2013}
+}
+```
+Li, J., Ott, M., & Cardie, C. (2013, October). Identifying manipulated offerings on review portals. In Proceedings of the 2013 conference on empirical methods in natural language processing (pp. 1933-1942). [https://aclanthology.org/D13-1199/](https://aclanthology.org/D13-1199/)
 
 ### 2. Citation for us
 Our dataset will soon be citable in academic publications as well.
-```
+```bibtex
 @misc{tripadvisor_dataset,
 author = {Junichiro, Niimi},
 title = {Hotel Review Dataset (English)},
@@ -69,6 +80,3 @@ year = {2024},
 howpublished = {\url{https://github.com/jniimi/tripadvisor_dataset}}
 }
 ```
-
-## References
-Li, J., Ott, M., & Cardie, C. (2013, October). Identifying manipulated offerings on review portals. In Proceedings of the 2013 conference on empirical methods in natural language processing (pp. 1933-1942). [https://aclanthology.org/D13-1199/](https://aclanthology.org/D13-1199/)
